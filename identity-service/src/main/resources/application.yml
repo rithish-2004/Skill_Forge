@@ -1,5 +1,6 @@
 server:
   port: 8001
+
 spring:
   application:
     name: identity-service
@@ -14,10 +15,17 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    # --- ADDED THIS SECTION ---
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    # --------------------------
+
 skillforge:
   jwt:
     secret: skillforge-enterprise-jwt-secret-key-minimum-256-bits-required-for-hs256-algorithm-safety

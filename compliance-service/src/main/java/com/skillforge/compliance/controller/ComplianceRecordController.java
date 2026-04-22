@@ -2,6 +2,7 @@ package com.skillforge.compliance.controller;
 
 import com.skillforge.compliance.dto.ComplianceRecordRequest;
 import com.skillforge.compliance.dto.ComplianceRecordResponse;
+import com.skillforge.compliance.entity.ComplianceRecord;
 import com.skillforge.compliance.service.ComplianceRecordService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -24,10 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class ComplianceRecordController {
   private final ComplianceRecordService complianceRecordService;
 
-  @PostMapping
+  @PostMapping("/create")
   @ResponseStatus(HttpStatus.CREATED)
   @PreAuthorize("isAuthenticated()")
-  public ComplianceRecordResponse create(@Valid @RequestBody ComplianceRecordRequest request) {
+  public ComplianceRecordResponse create(@Valid @RequestBody ComplianceRecord request) {
     return complianceRecordService.create(request);
   }
 

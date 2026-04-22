@@ -20,7 +20,7 @@ public class ComplianceRecordServiceImpl implements ComplianceRecordService {
 
   @Override
   @Transactional
-  public ComplianceRecordResponse create(ComplianceRecordRequest request) {
+  public ComplianceRecordResponse create(ComplianceRecord request) {
     var entity =
         ComplianceRecord.builder()
             .complianceId(IdGenerator.nextComplianceRecordId())

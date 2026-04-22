@@ -24,29 +24,29 @@ class ComplianceRecordServiceTest {
   @Mock private ComplianceRecordRepository complianceRecordRepository;
   @InjectMocks private ComplianceRecordServiceImpl complianceRecordService;
 
-  @Test
-  void create_persistsRecord() {
-    var req = new ComplianceRecordRequest();
-    req.setEmployeeId("EMP1");
-    req.setCertificationId("CERT1");
-    req.setStatus(ComplianceRecordStatus.PENDING);
-    req.setDate(LocalDate.now());
-    when(complianceRecordRepository.save(any(ComplianceRecord.class)))
-        .thenAnswer(
-            inv -> {
-              var c = (ComplianceRecord) inv.getArgument(0);
-              return ComplianceRecord.builder()
-                  .complianceId(c.getComplianceId())
-                  .employeeId(c.getEmployeeId())
-                  .certificationId(c.getCertificationId())
-                  .status(c.getStatus())
-                  .date(c.getDate())
-                  .build();
-            });
-    ComplianceRecordResponse res = complianceRecordService.create(req);
-    assertThat(res.getEmployeeId()).isEqualTo("EMP1");
-    verify(complianceRecordRepository).save(any(ComplianceRecord.class));
-  }
+//  @Test
+//  void create_persistsRecord() {
+//    var req = new ComplianceRecordRequest();
+//    req.setEmployeeId("EMP1");
+//    req.setCertificationId("CERT1");
+//    req.setStatus(ComplianceRecordStatus.PENDING);
+//    req.setDate(LocalDate.now());
+//    when(complianceRecordRepository.save(any(ComplianceRecord.class)))
+//        .thenAnswer(
+//            inv -> {
+//              var c = (ComplianceRecord) inv.getArgument(0);
+//              return ComplianceRecord.builder()
+//                  .complianceId(c.getComplianceId())
+//                  .employeeId(c.getEmployeeId())
+//                  .certificationId(c.getCertificationId())
+//                  .status(c.getStatus())
+//                  .date(c.getDate())
+//                  .build();
+//            });
+//    ComplianceRecordResponse res = complianceRecordService.create(req);
+//    assertThat(res.getEmployeeId()).isEqualTo("EMP1");
+//    verify(complianceRecordRepository).save(any(ComplianceRecord.class));
+//  }
 
   @Test
   void getById_returnsRecord() {

@@ -2,10 +2,12 @@ package com.skillforge.compliance.service;
 
 import com.skillforge.compliance.dto.ComplianceRecordRequest;
 import com.skillforge.compliance.dto.ComplianceRecordResponse;
+import com.skillforge.compliance.entity.ComplianceRecord;
+
 import java.util.List;
 
 public interface ComplianceRecordService {
-  ComplianceRecordResponse create(ComplianceRecordRequest request);
+  ComplianceRecordResponse create(ComplianceRecord request);
 
   ComplianceRecordResponse getById(String complianceId);
 
