@@ -33,8 +33,8 @@ public class GatewaySecurityConfig {
       if (exchange.getRequest().getMethod() == HttpMethod.OPTIONS) {
         return chain.filter(exchange);
       }
-      if (path.startsWith("/identity/api/v1/auth/login")
-          || path.startsWith("/identity/api/v1/auth/register")
+      if (path.startsWith("/api/v1/auth/login")
+          || path.startsWith("/api/v1/auth/register")
           || path.startsWith("/actuator")) {
         return chain.filter(exchange);
       }

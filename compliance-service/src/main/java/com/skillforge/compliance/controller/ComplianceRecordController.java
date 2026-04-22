@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ComplianceRecordController {
   private final ComplianceRecordService complianceRecordService;
 
-  @PostMapping("/create")
+  @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   @PreAuthorize("isAuthenticated()")
   public ComplianceRecordResponse create(@Valid @RequestBody ComplianceRecord request) {

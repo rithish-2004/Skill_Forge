@@ -6,54 +6,50 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: course-service
+          uri: lb://course-service
+          predicates:
+            - Path=/api/v1/courses,/api/v1/courses/**,/api/v1/modules,/api/v1/modules/**,/api/v1/module-contents,/api/v1/module-contents/**
+        - id: enrollment-service
+          uri: lb://enrollment-service
+          predicates:
+            - Path=/api/v1/enrollments,/api/v1/enrollments/**,/api/v1/attendances,/api/v1/attendances/**
+        - id: assessment-service
+          uri: lb://assessment-service
+          predicates:
+            - Path=/api/v1/assessments,/api/v1/assessments/**,/api/v1/certifications,/api/v1/certifications/**,/api/v1/results,/api/v1/results/**
+        - id: competency-service
+          uri: lb://competency-service
+          predicates:
+            - Path=/api/v1/competencies,/api/v1/competencies/**,/api/v1/skill-gaps,/api/v1/skill-gaps/**
+        - id: compliance-service
+          uri: lb://compliance-service
+          predicates:
+            - Path=/api/v1/compliance-records,/api/v1/compliance-records/**,/api/v1/audits,/api/v1/audits/**
+        - id: reporting-service
+          uri: lb://reporting-service
+          predicates:
+            - Path=/api/v1/reports,/api/v1/reports/**
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/notifications,/api/v1/notifications/**
         - id: identity-service
           uri: lb://identity-service
           predicates:
             - Path=/api/v1/**
-        - id: course-service
-          uri: lb://course-service
-          predicates:
-            - Path=/api/v1/courses/**
-        - id: enrollment-service
-          uri: lb://enrollment-service
-          predicates:
-            - Path=/enrollment/**
-          filters:
-            - StripPrefix=1
-        - id: assessment-service
-          uri: lb://assessment-service
-          predicates:
-            - Path=/assessment/**
-          filters:
-            - StripPrefix=1
-        - id: competency-service
-          uri: lb://competency-service
-          predicates:
-            - Path=/competency/**
-          filters:
-            - StripPrefix=1
-        - id: compliance-service
-          uri: lb://compliance-service
-          predicates:
-            - Path=/compliance/**
-          filters:
-            - StripPrefix=1
-        - id: reporting-service
-          uri: lb://reporting-service
-          predicates:
-            - Path=/reporting/**
-          filters:
-            - StripPrefix=1
-        - id: notification-service
-          uri: lb://notification-service
-          predicates:
-            - Path=/notification/**
-          filters:
-            - StripPrefix=1
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
 skillforge:
   jwt:
     secret: skillforge-enterprise-jwt-secret-key-minimum-256-bits-required-for-hs256-algorithm-safety
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.cloud.gateway: TRACE
