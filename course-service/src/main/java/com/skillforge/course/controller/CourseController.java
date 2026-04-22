@@ -37,7 +37,7 @@ public class CourseController {
     return courseService.getById(courseId);
   }
 
-  @GetMapping("all")
+  @GetMapping
   @PreAuthorize("isAuthenticated()")
   public List<CourseResponse> getAll() {
     return courseService.getAll();
